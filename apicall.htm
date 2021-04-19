@@ -1,0 +1,67 @@
+<!DocType html>
+<html>
+
+<head>
+    <style>
+        img{
+            width: 100px;
+        }
+    </style>
+
+    
+    
+<script>
+
+    function fetchUsers(params){
+         var users= [];
+         var myrequest = new XMLHttpRequest();
+         myrequest.open('GET', 'https://api.github.com/users');
+         myrequest.onreadystatechange = function(){
+             users = JSON.parse(this.response);
+
+             showTableData(users);
+         
+         };
+myrequest.send();
+    }
+
+
+    function showTableData(users){
+        let tablerow ='';
+        users.forEach(user => {
+            tablerow+= '<tr>'+ 
+                '<td>' + user.id+ '</td>' +
+                '<td><img src="' + user.avatar_url+ '" /img></td>' +
+                '<td>' + user.login+ '</td>'; 
+
+        });
+        document.getElementById("user-table").innerHTML= tablerow;
+    }
+</script>
+<table>   
+    
+    </table>
+
+
+</style>
+</script>
+
+</head>
+<body>
+<button onclick="fetchUsers()">Show Data</button> 
+<table class = "table">
+<thead>
+    <tr>
+<th>ID</th>
+<th>AVATAR</th>
+<th>LOGIN</th>
+</tr>
+</thead>
+<tbody id = "user-table">
+
+</tbody>
+
+</table>
+
+</body>
+</html>
